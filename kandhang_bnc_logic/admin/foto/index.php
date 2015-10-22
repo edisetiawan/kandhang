@@ -1,0 +1,1 @@
+anda ingin melihat foto lihat aja di <a href="pilih_hewan.php">pilih hewan</a>

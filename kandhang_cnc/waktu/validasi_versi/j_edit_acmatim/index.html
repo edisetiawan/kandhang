@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<title>Validasi Form dengan JQuery Validation - Achmatim.Net</title>
+		<style type="text/css">
+		.labelfrm {
+			display:block;
+			font-size:small;
+			margin-top:5px;
+		}
+		.error {
+			font-size:small;
+			color:red;
+		}
+		</style>
+		
+		<script type="text/javascript" src="jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery/jquery.validate.min.js"></script>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('#frm-mhs').validate({
+				rules: {
+					frm_nim : {
+						digits: true,
+						minlength:10,
+						maxlength:10
+					},
+					frm_tgl: {
+						indonesianDate:true
+					},
+					frm_umur: {
+						digits: true,
+						range: [0, 100]
+					}, 
+					frm_email: {
+						email: true
+					},
+					frm_situs: {
+						url: true
+					},
+					frm_pass2: {
+						equalTo: "#frm_pass1"
+						email: true
+					}
+				},
+				messages: {
+					frm_nim: {
+						required: "Kolom nim harus diisi",
+						minlength: "Kolom nim harus terdiri dari 10 digit",
+						maxlength: "Kolom nim harus terdiri dari 10 digit"
+					},
+					frm_email: {
+						required: "Alamat email harus diisi",
+						email: "Format email tidak valid"
+					},
+					frm_pass2: {
+						equalTo: "Password tidak sama"
+					}
+				}
+			});
+		});
+		
+		$.validator.addMethod(
+			"indonesianDate",
+			function(value, element) {
+				// put your own logic here, this is just a (crappy) example
+				return value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+			},
+			"Please enter a date in the format DD/MM/YYYY"
+		);
+		</script>
+		
+	</head>
+	<body>
+		<h1>Input Data Mahasiswa</h1>
+		<form action="proses.php" method="post" id="frm-mhs">
+			<label for="frm_nim" class="labelfrm">NIM: </label>
+			<input type="text" name="frm_nim" id="frm_nim" maxlength="10" class="required" size="15"/>
+			
+			<label for="frm_nama" class="labelfrm">NAMA: </label>
+			<input type="text" name="frm_nama" id="frm_nama" size="30" class="required"/>
+			
+			<label for="frm_alamat" class="labelfrm">ALAMAT: </label>
+			<textarea name="frm_alamat" id="frm_alamat" cols="40" rows="4" class="required"></textarea>
+			
+			<label for="frm_tgl" class="labelfrm">TANGGAL LAHIR: </label>
+			<input type="text" name="frm_tgl" id="frm_tgl" maxlength="10" size="15" class="required"/>
+			
+			<label for="frm_umur" class="labelfrm">UMUR: </label>
+			<input type="text" name="frm_umur" id="frm_umur" maxlength="3" size="7" class="required"/>
+			
+			<label for="frm_email" class="labelfrm">ALAMAT EMAIL: </label>
+			<input type="text" name="frm_email" id="frm_email" size="50" class="required"/>
+			
+			<label for="frm_situs" class="labelfrm">ALAMAT SITUS: </label>
+			<input type="text" name="frm_itus" id="frm_situs" size="50" class="required"/>
+			
+			<label for="frm_pass1" class="labelfrm">PASSWORD: </label>
+			<input type="text" name="frm_pass1" id="frm_pass1" size="15" class="required"/>
+			
+			<label for="frm_pass2" class="labelfrm">ULANGI PASSWORD: </label>
+			<input type="text" name="frm_pass2" id="frm_pass2" size="15" class="required"/>
+			
+			<label for="submit" class="labelfrm">&nbsp;</label>
+			<input type="submit" name="Submit" value="Submit"/>
+		</form>
+	</body>
+</html>

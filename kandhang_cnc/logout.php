@@ -1,0 +1,10 @@
+<?php
+session_start();
+unset($_SESSION['member_id']);
+unset($_SESSION['member_email']);
+unset($_SESSION['password']);
+unset($_SESSION['profil_id']);
+unset($_SESSION['profil_nama']);
+session_destroy();
+require_once('index.php');
+?>
